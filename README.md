@@ -70,5 +70,6 @@ open data.txt
 
 ## Author
 Created by: Ivaylo Markov
-Course project for Object-Oriented Programming
+
+Course project for Object-Oriented Programming  
 Technical University of Varna
