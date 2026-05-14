@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class CommandProcessor {
 
+    private FileManager fileManager = new FileManager();
     private AutomatonManager manager = new AutomatonManager();
     private int automatonCounter = 1;
 
@@ -26,16 +27,23 @@ public class CommandProcessor {
                 System.out.println("recognize <id> <word> - checks word");
                 System.out.println("union <id1> <id2> - unions automata");
                 System.out.println("concat <id1> <id2> - concatenates automata");
+                System.out.println("save - saves file");
                 System.out.println("exit - exits program");
             }
 
             else if (command.startsWith("open ")) {
+
                 String fileName = command.substring(5);
-                System.out.println("Successfully opened " + fileName);
+
+                fileManager.openFile(fileName);
             }
 
             else if (command.equals("close")) {
-                System.out.println("File closed.");
+                fileManager.closeFile();
+            }
+
+            else if (command.equals("save")) {
+                fileManager.saveFile();
             }
 
             else if (command.equals("test")) {

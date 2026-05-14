@@ -123,4 +123,29 @@ public class AutomatonManager {
 
         return result;
     }
+    public Automaton unAutomaton(Automaton automaton, String newId) {
+
+        Automaton result = new Automaton(newId);
+
+        for (String state : automaton.getStates()) {
+            result.addState(state);
+        }
+
+        for (String state : automaton.getFinalStates()) {
+            result.addFinalState(state);
+        }
+
+        for (Transition transition : automaton.getTransitions()) {
+
+            result.addTransition(
+                    transition.getFromState(),
+                    transition.getSymbol(),
+                    transition.getToState()
+            );
+        }
+
+        automata.add(result);
+
+        return result;
+    }
 }
