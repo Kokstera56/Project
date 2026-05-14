@@ -148,4 +148,11 @@ public class AutomatonManager {
 
         return result;
     }
+    public ArrayList<Automaton> getAutomata() {
+        return automata;
+    }
+
+    public void clearAutomata() {
+        automata.clear();
+    }
 }

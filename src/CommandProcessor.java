@@ -35,7 +35,7 @@ public class CommandProcessor {
 
                 String fileName = command.substring(5);
 
-                fileManager.openFile(fileName);
+                fileManager.openFile(fileName, manager);
             }
 
             else if (command.equals("close")) {
@@ -43,7 +43,7 @@ public class CommandProcessor {
             }
 
             else if (command.equals("save")) {
-                fileManager.saveFile();
+                fileManager.saveFile(manager);
             }
 
             else if (command.equals("test")) {
