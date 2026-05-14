@@ -1,3 +1,7 @@
+package Automata;
+import Automata.Models.Automaton;
+import Automata.Managers.AutomatonManager;
+import Automata.Managers.FileManager;
 import java.util.Scanner;
 
 public class CommandProcessor {
@@ -28,6 +32,7 @@ public class CommandProcessor {
                 System.out.println("union <id1> <id2> - unions automata");
                 System.out.println("concat <id1> <id2> - concatenates automata");
                 System.out.println("reg <regex> - creates automaton from regex");
+                System.out.println("un <id> - creates positive closure");
                 System.out.println("save - saves file");
                 System.out.println("save as <file> - saves in new file");
                 System.out.println("exit - exits program");
@@ -149,7 +154,7 @@ public class CommandProcessor {
                     Automaton automaton = manager.findAutomaton(id);
 
                     if (automaton == null) {
-                        System.out.println("Automaton not found.");
+                        System.out.println("Automata.Models.Automaton not found.");
                     }
                     else {
                         if (automaton.recognize(word)) {
@@ -237,6 +242,27 @@ public class CommandProcessor {
                 System.out.println("Regex automaton created: " + newId);
 
                 automatonCounter++;
+            }
+
+            else if (command.startsWith("un ")) {
+
+                String id = command.substring(3);
+
+                Automaton automaton = manager.findAutomaton(id);
+
+                if (automaton == null) {
+                    System.out.println("Automaton not found.");
+                }
+                else {
+
+                    String newId = "A" + automatonCounter;
+
+                    manager.unAutomaton(automaton, newId);
+
+                    System.out.println("Positive closure automaton created: " + newId);
+
+                    automatonCounter++;
+                }
             }
 
             else if (command.equals("exit")) {

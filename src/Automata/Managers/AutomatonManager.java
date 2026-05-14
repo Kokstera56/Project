@@ -1,3 +1,6 @@
+package Automata.Managers;
+import Automata.Models.Automaton;
+import Automata.Models.Transition;
 import java.util.ArrayList;
 
 public class AutomatonManager {

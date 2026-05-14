@@ -1,3 +1,6 @@
+package Automata.Models;
+import Automata.Models.Automaton;
+import Automata.Models.Transition;
 import java.util.ArrayList;
 
 public class Automaton {
@@ -42,7 +45,7 @@ public class Automaton {
 
     public void printInfo() {
 
-        System.out.println("Automaton ID: " + id);
+        System.out.println("Automata.Models.Automaton ID: " + id);
 
         System.out.println("States:");
 

@@ -1,3 +1,6 @@
+package Automata.Models;
+import Automata.Models.Automaton;
+import Automata.Models.Transition;
 public class Transition {
 
     private String fromState;

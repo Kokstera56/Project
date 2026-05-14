@@ -1,3 +1,8 @@
+package Automata.Managers;
+import Automata.Models.Automaton;
+import Automata.Models.Transition;
+import Automata.Models.Automaton;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
