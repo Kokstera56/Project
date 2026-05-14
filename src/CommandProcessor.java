@@ -25,6 +25,7 @@ public class CommandProcessor {
                 System.out.println("deterministic <id> - checks automaton");
                 System.out.println("recognize <id> <word> - checks word");
                 System.out.println("union <id1> <id2> - unions automata");
+                System.out.println("concat <id1> <id2> - concatenates automata");
                 System.out.println("exit - exits program");
             }
 
@@ -170,6 +171,38 @@ public class CommandProcessor {
                         manager.unionAutomata(first, second, newId);
 
                         System.out.println("Union automaton created: " + newId);
+
+                        automatonCounter++;
+                    }
+                }
+            }
+
+            else if (command.startsWith("concat ")) {
+
+                String text = command.substring(7);
+                String[] parts = text.split(" ");
+
+                if (parts.length != 2) {
+                    System.out.println("Invalid command. Use: concat <id1> <id2>");
+                }
+                else {
+
+                    String firstId = parts[0];
+                    String secondId = parts[1];
+
+                    Automaton first = manager.findAutomaton(firstId);
+                    Automaton second = manager.findAutomaton(secondId);
+
+                    if (first == null || second == null) {
+                        System.out.println("Automaton not found.");
+                    }
+                    else {
+
+                        String newId = "A" + automatonCounter;
+
+                        manager.concatAutomata(first, second, newId);
+
+                        System.out.println("Concatenated automaton created: " + newId);
 
                         automatonCounter++;
                     }

@@ -85,4 +85,42 @@ public class AutomatonManager {
 
         return result;
     }
+    public Automaton concatAutomata(Automaton first, Automaton second, String newId) {
+
+        Automaton result = new Automaton(newId);
+
+        for (String state : first.getStates()) {
+            result.addState(state);
+        }
+
+        for (String state : second.getStates()) {
+            if (!result.getStates().contains(state)) {
+                result.addState(state);
+            }
+        }
+
+        for (String state : second.getFinalStates()) {
+            result.addFinalState(state);
+        }
+
+        for (Transition transition : first.getTransitions()) {
+            result.addTransition(
+                    transition.getFromState(),
+                    transition.getSymbol(),
+                    transition.getToState()
+            );
+        }
+
+        for (Transition transition : second.getTransitions()) {
+            result.addTransition(
+                    transition.getFromState(),
+                    transition.getSymbol(),
+                    transition.getToState()
+            );
+        }
+
+        automata.add(result);
+
+        return result;
+    }
 }
