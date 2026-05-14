@@ -136,4 +136,11 @@ public class  FileManager {
     public boolean hasOpenedFile() {
         return fileOpened;
     }
+    public void saveAsFile(String newFile, AutomatonManager manager) {
+
+        currentFile = newFile;
+        fileOpened = true;
+
+        saveFile(manager);
+    }
 }

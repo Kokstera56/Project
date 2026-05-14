@@ -28,6 +28,7 @@ public class CommandProcessor {
                 System.out.println("union <id1> <id2> - unions automata");
                 System.out.println("concat <id1> <id2> - concatenates automata");
                 System.out.println("save - saves file");
+                System.out.println("save as <file> - saves in new file");
                 System.out.println("exit - exits program");
             }
 
@@ -65,6 +66,13 @@ public class CommandProcessor {
                 System.out.println("Test automaton created: " + automatonId);
 
                 automatonCounter++;
+            }
+
+            else if (command.startsWith("save as ")) {
+
+                String fileName = command.substring(8);
+
+                fileManager.saveAsFile(fileName, manager);
             }
 
             else if (command.equals("list")) {
