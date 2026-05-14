@@ -45,25 +45,33 @@ public class Automaton {
 
     public void printInfo() {
 
-        System.out.println("Automata.Models.Automaton ID: " + id);
+        System.out.println("========== AUTOMATON ==========");
+        System.out.println("ID: " + id);
+        System.out.println();
 
         System.out.println("States:");
 
         for (String state : states) {
-            System.out.println(state);
+            System.out.println(" - " + state);
         }
+
+        System.out.println();
 
         System.out.println("Final states:");
 
         for (String state : finalStates) {
-            System.out.println(state);
+            System.out.println(" - " + state);
         }
+
+        System.out.println();
 
         System.out.println("Transitions:");
 
         for (Transition transition : transitions) {
             transition.printTransition();
         }
+
+        System.out.println("===============================");
     }
     public boolean isEmpty() {
 

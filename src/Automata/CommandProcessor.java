@@ -13,29 +13,36 @@ public class CommandProcessor {
     public void start() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Program started.");
+        System.out.println("========================");
+        System.out.println("      AUTOMATA PROJECT");
+        System.out.println("========================");
+        System.out.println();
+        System.out.println("Type 'help' to see commands.");
 
         while (true) {
             System.out.print("> ");
             String command = scanner.nextLine();
 
             if (command.equals("help")) {
-                System.out.println("help - shows commands");
-                System.out.println("open <file> - opens file");
-                System.out.println("close - closes file");
-                System.out.println("test - creates test automaton");
-                System.out.println("list - lists automata");
-                System.out.println("print <id> - prints automaton");
-                System.out.println("empty <id> - checks if automaton is empty");
-                System.out.println("deterministic <id> - checks automaton");
-                System.out.println("recognize <id> <word> - checks word");
-                System.out.println("union <id1> <id2> - unions automata");
-                System.out.println("concat <id1> <id2> - concatenates automata");
-                System.out.println("reg <regex> - creates automaton from regex");
-                System.out.println("un <id> - creates positive closure");
-                System.out.println("save - saves file");
-                System.out.println("save as <file> - saves in new file");
-                System.out.println("exit - exits program");
+
+                System.out.println("========== COMMANDS ==========");
+                System.out.println("help                      - Shows all commands");
+                System.out.println("open <file>               - Opens file");
+                System.out.println("close                     - Closes current file");
+                System.out.println("save                      - Saves current file");
+                System.out.println("save as <file>            - Saves in new file");
+                System.out.println("test                      - Creates test automaton");
+                System.out.println("list                      - Lists automata");
+                System.out.println("print <id>                - Prints automaton");
+                System.out.println("empty <id>                - Checks if automaton is empty");
+                System.out.println("deterministic <id>        - Checks if automaton is deterministic");
+                System.out.println("recognize <id> <word>     - Checks word");
+                System.out.println("union <id1> <id2>         - Unions automata");
+                System.out.println("concat <id1> <id2>        - Concatenates automata");
+                System.out.println("un <id>                   - Creates positive closure");
+                System.out.println("reg <regex>               - Creates regex automaton");
+                System.out.println("exit                      - Exits program");
+                System.out.println("==============================");
             }
 
             else if (command.startsWith("open ")) {

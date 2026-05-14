@@ -22,7 +22,7 @@ public class AutomatonManager {
             return;
         }
 
-        System.out.println("Loaded automata:");
+        System.out.println("[INFO] Loaded automata:");
 
         for (Automaton automaton : automata) {
             System.out.println(automaton.getId());

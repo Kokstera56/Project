@@ -131,7 +131,7 @@ public class  FileManager {
 
             writer.close();
 
-            System.out.println("File saved: " + currentFile);
+            System.out.println("[SUCCESS] File saved: " + currentFile);
         }
         catch (IOException e) {
             System.out.println("Error while saving file.");
