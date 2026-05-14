@@ -1,6 +1,4 @@
 package Automata.Models;
-import Automata.Models.Automaton;
-import Automata.Models.Transition;
 import java.util.ArrayList;
 
 public class Automaton {

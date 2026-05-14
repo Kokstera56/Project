@@ -161,7 +161,7 @@ public class CommandProcessor {
                     Automaton automaton = manager.findAutomaton(id);
 
                     if (automaton == null) {
-                        System.out.println("Automata.Models.Automaton not found.");
+                        System.out.println("Automaton not found.");
                     }
                     else {
                         if (automaton.recognize(word)) {
