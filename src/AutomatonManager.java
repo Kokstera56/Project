@@ -155,4 +155,20 @@ public class AutomatonManager {
     public void clearAutomata() {
         automata.clear();
     }
+
+    public Automaton regexAutomaton(String regex, String newId) {
+
+        Automaton automaton = new Automaton(newId);
+
+        automaton.addState("q0");
+        automaton.addState("q1");
+
+        automaton.addFinalState("q1");
+
+        automaton.addTransition("q0", regex, "q1");
+
+        automata.add(automaton);
+
+        return automaton;
+    }
 }

@@ -27,6 +27,7 @@ public class CommandProcessor {
                 System.out.println("recognize <id> <word> - checks word");
                 System.out.println("union <id1> <id2> - unions automata");
                 System.out.println("concat <id1> <id2> - concatenates automata");
+                System.out.println("reg <regex> - creates automaton from regex");
                 System.out.println("save - saves file");
                 System.out.println("save as <file> - saves in new file");
                 System.out.println("exit - exits program");
@@ -223,6 +224,19 @@ public class CommandProcessor {
                         automatonCounter++;
                     }
                 }
+            }
+
+            else if (command.startsWith("reg ")) {
+
+                String regex = command.substring(4);
+
+                String newId = "A" + automatonCounter;
+
+                manager.regexAutomaton(regex, newId);
+
+                System.out.println("Regex automaton created: " + newId);
+
+                automatonCounter++;
             }
 
             else if (command.equals("exit")) {
