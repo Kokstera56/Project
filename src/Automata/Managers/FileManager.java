@@ -26,7 +26,7 @@ public class  FileManager {
 
         try {
 
-            File file = new File(fileName);
+            File file = new File("files/" + fileName);
             Scanner scanner = new Scanner(file);
 
             Automaton currentAutomaton = null;
@@ -102,7 +102,7 @@ public class  FileManager {
         }
 
         try {
-            FileWriter writer = new FileWriter(currentFile);
+            FileWriter writer = new FileWriter("files/" + currentFile);
 
             for (Automaton automaton : manager.getAutomata()) {
                 writer.write("AUTOMATON " + automaton.getId() + "\n");
