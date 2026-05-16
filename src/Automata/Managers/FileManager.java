@@ -1,11 +1,14 @@
 package Automata.Managers;
+
 import Automata.Models.Automaton;
 import Automata.Models.Transition;
+
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.File;
 import java.util.Scanner;
-public class  FileManager {
+
+public class FileManager {
 
     private String currentFile;
     private boolean fileOpened;
@@ -40,27 +43,21 @@ public class  FileManager {
                     currentAutomaton = new Automaton(parts[1]);
 
                     manager.addAutomaton(currentAutomaton);
-                }
-
-                else if (line.startsWith("STATES")) {
+                } else if (line.startsWith("STATES")) {
 
                     String[] parts = line.split(" ");
 
                     for (int i = 1; i < parts.length; i++) {
                         currentAutomaton.addState(parts[i]);
                     }
-                }
-
-                else if (line.startsWith("FINAL")) {
+                } else if (line.startsWith("FINAL")) {
 
                     String[] parts = line.split(" ");
 
                     for (int i = 1; i < parts.length; i++) {
                         currentAutomaton.addFinalState(parts[i]);
                     }
-                }
-
-                else if (line.startsWith("TRANSITION")) {
+                } else if (line.startsWith("TRANSITION")) {
 
                     String[] parts = line.split(" ");
 
@@ -75,8 +72,7 @@ public class  FileManager {
             scanner.close();
 
             System.out.println("Successfully opened " + fileName);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Error while opening file.");
         }
     }
@@ -130,8 +126,7 @@ public class  FileManager {
             writer.close();
 
             System.out.println("[SUCCESS] File saved: " + currentFile);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("Error while saving file.");
         }
     }
@@ -139,6 +134,7 @@ public class  FileManager {
     public boolean hasOpenedFile() {
         return fileOpened;
     }
+
     public void saveAsFile(String newFile, AutomatonManager manager) {
 
         currentFile = newFile;

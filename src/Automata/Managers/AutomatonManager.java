@@ -1,6 +1,8 @@
 package Automata.Managers;
+
 import Automata.Models.Automaton;
 import Automata.Models.Transition;
+
 import java.util.ArrayList;
 
 public class AutomatonManager {
@@ -40,6 +42,7 @@ public class AutomatonManager {
 
         return null;
     }
+
     public Automaton unionAutomata(Automaton first, Automaton second, String newId) {
 
         Automaton result = new Automaton(newId);
@@ -88,6 +91,7 @@ public class AutomatonManager {
 
         return result;
     }
+
     public Automaton concatAutomata(Automaton first, Automaton second, String newId) {
 
         Automaton result = new Automaton(newId);
@@ -126,6 +130,7 @@ public class AutomatonManager {
 
         return result;
     }
+
     public Automaton unAutomaton(Automaton automaton, String newId) {
 
         Automaton result = new Automaton(newId);
@@ -151,6 +156,7 @@ public class AutomatonManager {
 
         return result;
     }
+
     public ArrayList<Automaton> getAutomata() {
         return automata;
     }
@@ -173,5 +179,14 @@ public class AutomatonManager {
         automata.add(automaton);
 
         return automaton;
+    }
+
+    public Automaton determinizeAutomaton(Automaton automaton, String newId) {
+
+        Automaton result = automaton.determinize(newId);
+
+        automata.add(result);
+
+        return result;
     }
 }

@@ -1,4 +1,5 @@
 package Automata.Models;
+
 public class Transition {
 
     private String fromState;

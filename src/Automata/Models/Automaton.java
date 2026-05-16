@@ -1,4 +1,5 @@
 package Automata.Models;
+
 import java.util.ArrayList;
 
 public class Automaton {
@@ -71,10 +72,12 @@ public class Automaton {
 
         System.out.println("===============================");
     }
+
     public boolean isEmpty() {
 
         return finalStates.isEmpty();
     }
+
     public void addTransition(String fromState, String symbol, String toState) {
 
         Transition transition =
@@ -82,6 +85,7 @@ public class Automaton {
 
         transitions.add(transition);
     }
+
     public boolean isDeterministic() {
 
         for (int i = 0; i < transitions.size(); i++) {
@@ -170,6 +174,7 @@ public class Automaton {
 
         return result;
     }
+
     public boolean isFinite() {
 
         for (String state : states) {
@@ -198,6 +203,138 @@ public class Automaton {
                 if (hasCycleFromState(transition.getToState(), newVisited)) {
                     return true;
                 }
+            }
+        }
+
+        return false;
+    }
+
+    public Automaton determinize(String newId) {
+
+        Automaton result = new Automaton(newId);
+
+        ArrayList<String> alphabet = getAlphabetWithoutEps();
+
+        ArrayList<String> startStates = new ArrayList<>();
+        startStates.add("q0");
+
+        ArrayList<String> startClosure = epsilonClosure(startStates);
+
+        ArrayList<ArrayList<String>> unprocessed = new ArrayList<>();
+        ArrayList<ArrayList<String>> processed = new ArrayList<>();
+
+        unprocessed.add(startClosure);
+
+        String startName = createStateName(startClosure);
+        result.addState(startName);
+
+        if (containsFinalState(startClosure)) {
+            result.addFinalState(startName);
+        }
+
+        while (!unprocessed.isEmpty()) {
+
+            ArrayList<String> currentStates = unprocessed.remove(0);
+            processed.add(currentStates);
+
+            String currentName = createStateName(currentStates);
+
+            for (String symbol : alphabet) {
+
+                ArrayList<String> nextStates = new ArrayList<>();
+
+                for (String state : currentStates) {
+
+                    for (Transition transition : transitions) {
+
+                        if (transition.getFromState().equals(state)
+                                && transition.getSymbol().equals(symbol)
+                                && !nextStates.contains(transition.getToState())) {
+
+                            nextStates.add(transition.getToState());
+                        }
+                    }
+                }
+
+                nextStates = epsilonClosure(nextStates);
+
+                if (nextStates.isEmpty()) {
+                    continue;
+                }
+
+                String nextName = createStateName(nextStates);
+
+                if (!result.getStates().contains(nextName)) {
+                    result.addState(nextName);
+
+                    if (containsFinalState(nextStates)) {
+                        result.addFinalState(nextName);
+                    }
+                }
+
+                result.addTransition(currentName, symbol, nextName);
+
+                if (!containsStateSet(processed, nextStates)
+                        && !containsStateSet(unprocessed, nextStates)) {
+
+                    unprocessed.add(nextStates);
+                }
+            }
+        }
+
+        return result;
+    }
+
+    private ArrayList<String> getAlphabetWithoutEps() {
+
+        ArrayList<String> alphabet = new ArrayList<>();
+
+        for (Transition transition : transitions) {
+
+            String symbol = transition.getSymbol();
+
+            if (!symbol.equals("eps") && !alphabet.contains(symbol)) {
+                alphabet.add(symbol);
+            }
+        }
+
+        return alphabet;
+    }
+
+    private boolean containsFinalState(ArrayList<String> currentStates) {
+
+        for (String state : currentStates) {
+
+            if (finalStates.contains(state)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private String createStateName(ArrayList<String> currentStates) {
+
+        String name = "";
+
+        for (String state : currentStates) {
+            name += state + "_";
+        }
+
+        if (name.endsWith("_")) {
+            name = name.substring(0, name.length() - 1);
+        }
+
+        return name;
+    }
+
+    private boolean containsStateSet(ArrayList<ArrayList<String>> list, ArrayList<String> statesToFind) {
+
+        for (ArrayList<String> states : list) {
+
+            if (states.size() == statesToFind.size()
+                    && states.containsAll(statesToFind)) {
+                return true;
             }
         }
 
