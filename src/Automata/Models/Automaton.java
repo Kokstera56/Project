@@ -106,32 +106,69 @@ public class Automaton {
 
         return true;
     }
+    
     public boolean recognize(String word) {
 
-        String currentState = "q0";
+        ArrayList<String> currentStates = new ArrayList<>();
+        currentStates.add("q0");
+
+        currentStates = epsilonClosure(currentStates);
 
         for (int i = 0; i < word.length(); i++) {
 
             String symbol = String.valueOf(word.charAt(i));
-            boolean foundTransition = false;
 
-            for (Transition transition : transitions) {
+            ArrayList<String> nextStates = new ArrayList<>();
 
-                if (transition.getFromState().equals(currentState)
-                        && transition.getSymbol().equals(symbol)) {
+            for (String state : currentStates) {
 
-                    currentState = transition.getToState();
-                    foundTransition = true;
-                    break;
+                for (Transition transition : transitions) {
+
+                    if (transition.getFromState().equals(state)
+                            && transition.getSymbol().equals(symbol)
+                            && !nextStates.contains(transition.getToState())) {
+
+                        nextStates.add(transition.getToState());
+                    }
                 }
             }
 
-            if (!foundTransition) {
-                return false;
+            currentStates = epsilonClosure(nextStates);
+        }
+
+        for (String state : currentStates) {
+
+            if (finalStates.contains(state)) {
+                return true;
             }
         }
 
-        return finalStates.contains(currentState);
+        return false;
+    }
+
+    private ArrayList<String> epsilonClosure(ArrayList<String> currentStates) {
+
+        ArrayList<String> result = new ArrayList<>(currentStates);
+
+        boolean changed = true;
+
+        while (changed) {
+
+            changed = false;
+
+            for (Transition transition : transitions) {
+
+                if (transition.getSymbol().equals("eps")
+                        && result.contains(transition.getFromState())
+                        && !result.contains(transition.getToState())) {
+
+                    result.add(transition.getToState());
+                    changed = true;
+                }
+            }
+        }
+
+        return result;
     }
 }
 
