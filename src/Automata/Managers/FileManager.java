@@ -8,6 +8,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Handles file operations in the project.
+ */
 public class FileManager {
 
     private String currentFile;
@@ -18,6 +21,11 @@ public class FileManager {
         fileOpened = false;
     }
 
+    /**
+     * Opens file and loads automata data.
+     *
+     * @param filename file name
+     */
     public void openFile(String fileName, AutomatonManager manager) {
 
         currentFile = fileName;
@@ -77,6 +85,9 @@ public class FileManager {
         }
     }
 
+    /**
+     * Closes currently opened file.
+     */
     public void closeFile() {
         if (!fileOpened) {
             System.out.println("No opened file.");
@@ -89,6 +100,9 @@ public class FileManager {
         fileOpened = false;
     }
 
+    /**
+     * Saves automata data in current file.
+     */
     public void saveFile(AutomatonManager manager) {
         if (!fileOpened) {
             System.out.println("No opened file.");
@@ -131,10 +145,20 @@ public class FileManager {
         }
     }
 
+    /**
+     * Checks if file is currently opened.
+     *
+     * @return true if file is opened
+     */
     public boolean hasOpenedFile() {
         return fileOpened;
     }
 
+    /**
+     * Saves automata data in new file.
+     *
+     * @param filename new file name
+     */
     public void saveAsFile(String newFile, AutomatonManager manager) {
 
         currentFile = newFile;

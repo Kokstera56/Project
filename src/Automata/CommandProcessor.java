@@ -6,12 +6,19 @@ import Automata.Models.Automaton;
 
 import java.util.Scanner;
 
+/**
+ * Processes user commands from console.
+ */
 public class CommandProcessor {
 
     private FileManager fileManager = new FileManager();
     private AutomatonManager manager = new AutomatonManager();
     private int automatonCounter = 1;
 
+
+    /**
+     * Starts command processing loop.
+     */
     public void start() {
         Scanner scanner = new Scanner(System.in);
 

@@ -2,6 +2,9 @@ package Automata.Models;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a finite automaton with states, final states and transitions.
+ */
 public class Automaton {
 
     private String id;
@@ -9,6 +12,11 @@ public class Automaton {
     private ArrayList<String> finalStates;
     private ArrayList<Transition> transitions;
 
+    /**
+     * Creates automaton with given id.
+     *
+     * @param id automaton identifier
+     */
     public Automaton(String id) {
 
         this.id = id;
@@ -34,14 +42,29 @@ public class Automaton {
         return transitions;
     }
 
+    /**
+     * Adds state to automaton.
+     *
+     * @param state state name
+     */
     public void addState(String state) {
         states.add(state);
     }
 
+
+    /**
+     * Adds final state to automaton.
+     *
+     * @param state final state name
+     */
     public void addFinalState(String state) {
         finalStates.add(state);
     }
 
+
+    /**
+     * Prints full information about the automaton.
+     */
     public void printInfo() {
 
         System.out.println("========== AUTOMATON ==========");
@@ -73,11 +96,23 @@ public class Automaton {
         System.out.println("===============================");
     }
 
+    /**
+     * Checks if automaton language is empty.
+     *
+     * @return true if there are no final states
+     */
     public boolean isEmpty() {
 
         return finalStates.isEmpty();
     }
 
+    /**
+     * Adds transition between two states.
+     *
+     * @param fromState start state
+     * @param symbol    transition symbol
+     * @param toState   destination state
+     */
     public void addTransition(String fromState, String symbol, String toState) {
 
         Transition transition =
@@ -86,6 +121,11 @@ public class Automaton {
         transitions.add(transition);
     }
 
+    /**
+     * Checks if automaton is deterministic.
+     *
+     * @return true if automaton is deterministic
+     */
     public boolean isDeterministic() {
         for (Transition transition : transitions) {
             if (transition.getSymbol().equals("eps")) {
@@ -115,6 +155,12 @@ public class Automaton {
         return true;
     }
 
+    /**
+     * Checks if word is recognized by the automaton.
+     *
+     * @param word input word
+     * @return true if word is recognized
+     */
     public boolean recognize(String word) {
 
         ArrayList<String> currentStates = new ArrayList<>();
@@ -154,6 +200,13 @@ public class Automaton {
         return false;
     }
 
+
+    /**
+     * Creates epsilon closure for current states.
+     *
+     * @param currentStates current automaton states
+     * @return epsilon closure states
+     */
     private ArrayList<String> epsilonClosure(ArrayList<String> currentStates) {
 
         ArrayList<String> result = new ArrayList<>(currentStates);
@@ -179,6 +232,11 @@ public class Automaton {
         return result;
     }
 
+    /**
+     * Checks if automaton language is finite.
+     *
+     * @return true if language is finite
+     */
     public boolean isFinite() {
 
         for (String state : states) {
@@ -190,6 +248,13 @@ public class Automaton {
         return true;
     }
 
+    /**
+     * Checks if there is cycle starting from given state.
+     *
+     * @param state   current state
+     * @param visited visited states
+     * @return true if cycle exists
+     */
     private boolean hasCycleFromState(String state, ArrayList<String> visited) {
 
         if (visited.contains(state)) {
@@ -213,6 +278,12 @@ public class Automaton {
         return false;
     }
 
+    /**
+     * Creates deterministic automaton from current automaton.
+     *
+     * @param newId identifier of new automaton
+     * @return deterministic automaton
+     */
     public Automaton determinize(String newId) {
 
         Automaton result = new Automaton(newId);

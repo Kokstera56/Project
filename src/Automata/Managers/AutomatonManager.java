@@ -5,6 +5,9 @@ import Automata.Models.Transition;
 
 import java.util.ArrayList;
 
+/**
+ * Manages all automata in the system.
+ */
 public class AutomatonManager {
 
     private ArrayList<Automaton> automata;
@@ -13,10 +16,18 @@ public class AutomatonManager {
         automata = new ArrayList<>();
     }
 
+    /**
+     * Adds automaton to manager.
+     *
+     * @param automaton automaton object
+     */
     public void addAutomaton(Automaton automaton) {
         automata.add(automaton);
     }
 
+    /**
+     * Prints all loaded automata.
+     */
     public void listAutomata() {
 
         if (automata.isEmpty()) {
@@ -31,6 +42,12 @@ public class AutomatonManager {
         }
     }
 
+    /**
+     * Finds automaton by identifier.
+     *
+     * @param id automaton identifier
+     * @return found automaton
+     */
     public Automaton findAutomaton(String id) {
 
         for (Automaton automaton : automata) {
@@ -43,6 +60,14 @@ public class AutomatonManager {
         return null;
     }
 
+    /**
+     * Creates union of two automata.
+     *
+     * @param first  first automaton
+     * @param second second automaton
+     * @param newId  identifier of new automaton
+     * @return new automaton
+     */
     public Automaton unionAutomata(Automaton first, Automaton second, String newId) {
 
         Automaton result = new Automaton(newId);
@@ -92,6 +117,14 @@ public class AutomatonManager {
         return result;
     }
 
+    /**
+     * Concatenates two automata.
+     *
+     * @param first  first automaton
+     * @param second second automaton
+     * @param newId  identifier of new automaton
+     * @return concatenated automaton
+     */
     public Automaton concatAutomata(Automaton first, Automaton second, String newId) {
 
         Automaton result = new Automaton(newId);
@@ -131,6 +164,13 @@ public class AutomatonManager {
         return result;
     }
 
+    /**
+     * Creates positive closure of automaton.
+     *
+     * @param automaton source automaton
+     * @param newId     identifier of new automaton
+     * @return new automaton
+     */
     public Automaton unAutomaton(Automaton automaton, String newId) {
 
         Automaton result = new Automaton(newId);
@@ -165,6 +205,13 @@ public class AutomatonManager {
         automata.clear();
     }
 
+    /**
+     * Creates automaton from regular expression.
+     *
+     * @param regex regular expression
+     * @param newId identifier of new automaton
+     * @return created automaton
+     */
     public Automaton regexAutomaton(String regex, String newId) {
 
         Automaton automaton = new Automaton(newId);
@@ -181,6 +228,13 @@ public class AutomatonManager {
         return automaton;
     }
 
+    /**
+     * Creates deterministic version of automaton.
+     *
+     * @param automaton source automaton
+     * @param newId     identifier of new automaton
+     * @return deterministic automaton
+     */
     public Automaton determinizeAutomaton(Automaton automaton, String newId) {
 
         Automaton result = automaton.determinize(newId);
