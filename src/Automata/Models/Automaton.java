@@ -106,7 +106,7 @@ public class Automaton {
 
         return true;
     }
-    
+
     public boolean recognize(String word) {
 
         ArrayList<String> currentStates = new ArrayList<>();
@@ -169,6 +169,39 @@ public class Automaton {
         }
 
         return result;
+    }
+    public boolean isFinite() {
+
+        for (String state : states) {
+            if (hasCycleFromState(state, new ArrayList<String>())) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean hasCycleFromState(String state, ArrayList<String> visited) {
+
+        if (visited.contains(state)) {
+            return true;
+        }
+
+        visited.add(state);
+
+        for (Transition transition : transitions) {
+
+            if (transition.getFromState().equals(state)) {
+
+                ArrayList<String> newVisited = new ArrayList<>(visited);
+
+                if (hasCycleFromState(transition.getToState(), newVisited)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }
 

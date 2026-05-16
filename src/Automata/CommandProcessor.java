@@ -41,6 +41,7 @@
                     System.out.println("concat <id1> <id2>        - Concatenates automata");
                     System.out.println("un <id>                   - Creates positive closure");
                     System.out.println("reg <regex>               - Creates regex automaton");
+                    System.out.println("finite <id>               - Checks if language is finite");
                     System.out.println("exit                      - Exits program");
                     System.out.println("==============================");
                 }
@@ -171,6 +172,29 @@
                         }
                         else {
                             System.out.println("Automaton is NOT deterministic.");
+                        }
+                    }
+                }
+
+                else if (command.startsWith("finite ")) {
+
+                    if (!checkFileOpened()) {
+                        continue;
+                    }
+
+                    String id = command.substring(7);
+
+                    Automaton automaton = manager.findAutomaton(id);
+
+                    if (automaton == null) {
+                        System.out.println("Automaton not found.");
+                    }
+                    else {
+                        if (automaton.isFinite()) {
+                            System.out.println("Automaton language is finite.");
+                        }
+                        else {
+                            System.out.println("Automaton language is infinite.");
                         }
                     }
                 }
