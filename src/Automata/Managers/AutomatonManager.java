@@ -20,7 +20,7 @@ public class AutomatonManager {
     public void listAutomata() {
 
         if (automata.isEmpty()) {
-            System.out.println("No automata loaded.");
+            System.out.println("[INFO] No automata loaded.");
             return;
         }
 

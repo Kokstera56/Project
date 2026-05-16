@@ -87,7 +87,11 @@ public class Automaton {
     }
 
     public boolean isDeterministic() {
-
+        for (Transition transition : transitions) {
+            if (transition.getSymbol().equals("eps")) {
+                return false;
+            }
+        }
         for (int i = 0; i < transitions.size(); i++) {
 
             Transition first = transitions.get(i);
