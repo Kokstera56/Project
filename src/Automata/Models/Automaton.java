@@ -178,8 +178,7 @@ public class Automaton {
 
                 for (Transition transition : transitions) {
 
-                    if (transition.getFromState().equals(state)
-                            && transition.getSymbol().equals(symbol)
+                    if (transition.getFromState().equals(state) && transition.getSymbol().equals(symbol)
                             && !nextStates.contains(transition.getToState())) {
 
                         nextStates.add(transition.getToState());
